@@ -11,5 +11,4 @@ export interface CommitType {
     avatar_url: string
   }
   timestamp: string
-  is_loading: boolean
 }

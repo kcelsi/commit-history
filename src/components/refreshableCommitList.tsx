@@ -43,7 +43,6 @@ const RefreshableCommitList = ({
               authorName={commit.commit.author.name}
               sha={commit.sha}
               timestamp={dayjs(commit.commit.author.date).from(currentTime)}
-              isLoading={commit.is_loading}
             />
           </li>
         ))}
