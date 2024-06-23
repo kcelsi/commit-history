@@ -10,4 +10,6 @@ export interface CommitType {
   author: {
     avatar_url: string
   }
+  timestamp: string
+  is_loading: boolean
 }

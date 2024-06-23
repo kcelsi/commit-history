@@ -1,12 +1,13 @@
 'use client'
 
 import { CommitType } from '@/types/commit'
-import { useState } from 'react'
-import { getCommits } from '@/lib/getCommits'
+import { useEffect, useState } from 'react'
 import RefreshButton from '@/components/refreshButton'
 import Commit from '@/components/commit'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+
+const TIME_TO_UPDATE_MS = 60000
 
 dayjs.extend(relativeTime)
 
@@ -17,24 +18,36 @@ const RefreshableCommitList = ({
 }) => {
   const [commits, setCommits] = useState<CommitType[]>(initialCommits)
 
-  const refreshCommits = async () => {
-    const newCommits = await getCommits()
+  const refreshCommits = async (newCommits: CommitType[]) => {
     setCommits(newCommits)
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCommits((prevCommits) =>
+        prevCommits.map((commit) => ({
+          ...commit,
+          timestamp: dayjs(commit.timestamp).fromNow(),
+        }))
+      )
+    }, TIME_TO_UPDATE_MS)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div>
-      <RefreshButton onClick={refreshCommits} />
-      <ul>
+    <div className="flex flex-col justify-center items-center gap-5">
+      <RefreshButton commitCount={commits.length} onClick={refreshCommits} />
+      <ul className="max-w-screen-md">
         {commits.map((commit) => (
-          <li key={commit.sha}>
+          <li key={commit.sha} className="mb-2">
             <Commit
               authorAvatarUrl={commit.author.avatar_url}
               message={commit.commit.message}
               authorName={commit.commit.author.name}
               sha={commit.sha}
-              timestamp={commit.commit.author.date}
-              isLoading={false}
+              timestamp={commit.timestamp}
+              isLoading={commit.is_loading}
             />
           </li>
         ))}

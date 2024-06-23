@@ -1,10 +1,44 @@
-const RefreshButton: React.FC<{ onClick: () => void }> = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition duration-150 ease-in-out"
-  >
-    Refresh
-  </button>
-)
+'use client'
 
-export default RefreshButton
+import { loadCommitsForm } from '@/actions/actionCommit'
+import { useFormState, useFormStatus } from 'react-dom'
+import { COMMIT } from '@/constants/commit'
+import { CommitType } from '@/types/commit'
+import { memo, useEffect } from 'react'
+
+const RefreshButton: React.FC<{
+  commitCount: number
+  onClick: (commits: CommitType[]) => void
+}> = ({ commitCount, onClick }) => {
+  const [state, formAction] = useFormState(loadCommitsForm, [COMMIT])
+
+  useEffect(() => {
+    if (state.at(0) === COMMIT) return
+
+    onClick(state)
+  }, [state])
+
+  return (
+    <form action={formAction}>
+      <input
+        type="number"
+        placeholder="count commits to load"
+        name="count"
+        defaultValue={commitCount}
+      />
+      <SubmitButton />
+    </form>
+  )
+}
+
+const SubmitButton: React.FC = () => {
+  const { pending } = useFormStatus()
+
+  return (
+    <button type="submit" disabled={pending}>
+      Refresh
+    </button>
+  )
+}
+
+export default memo(RefreshButton)
