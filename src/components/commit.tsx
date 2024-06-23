@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import Image from 'next/image'
 
 interface CommitProps {
@@ -16,25 +16,13 @@ const Commit: React.FC<CommitProps> = ({
   sha,
   authorAvatarUrl,
 }) => {
-  const [isImageLoaded, setIsImageLoaded] = useState(false)
-
   return (
     <div className="border p-4 rounded-lg shadow-md bg-white">
       <div className="flex items-center">
-        {!isImageLoaded && (
-          <div
-            role="status"
-            aria-label="Loading avatar"
-            className="w-10 h-10 rounded-full mr-4 bg-gray-400 animate-pulse"
-          ></div>
-        )}
         <Image
           src={authorAvatarUrl}
           alt={`${authorName}'s avatar`}
-          className={`w-10 h-10 rounded-full mr-4 ${!isImageLoaded && 'hidden'}`}
-          onLoad={() => {
-            setIsImageLoaded(true)
-          }}
+          className="rounded-full mr-4"
           width={50}
           height={50}
         />
