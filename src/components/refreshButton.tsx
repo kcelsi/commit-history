@@ -25,6 +25,8 @@ const RefreshButton: React.FC<{
     >
       <input
         type="number"
+        min={1}
+        max={200}
         placeholder="Count commits to load"
         name="count"
         defaultValue={commitCount}
