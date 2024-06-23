@@ -2,7 +2,7 @@
 
 This is a simple application to display the git commit history of the repository.
 
-Link to app: 
+Link to app: https://commit-history-delta.vercel.app/
 
 ## 🧑‍🔧 Technologies Used
 
