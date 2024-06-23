@@ -3,11 +3,14 @@ import RefreshableCommitList from '@/components/refreshableCommitList'
 import { loadCommits } from '@/actions/actionCommit'
 import { DEFAULT_COMMIT_COUNT_TO_LOAD } from '@/constants/commit'
 import Link from 'next/link'
+import { getCommitCount } from '@/lib/getCommits'
+import { getPlural } from '@/utils/getPluralCommit'
 
 const HomePage = async () => {
   const initialCommits: CommitType[] = await loadCommits(
     DEFAULT_COMMIT_COUNT_TO_LOAD
   )
+  const countCommits: number = await getCommitCount()
 
   return (
     <main>
@@ -21,6 +24,12 @@ const HomePage = async () => {
           {`${process.env.GITHUB_USERNAME}/${process.env.REPO_NAME}`}
         </Link>
       </h1>
+
+      <p className="text-center text-xl text-gray-700 my-4">
+        There are{' '}
+        <span className="text-blue-500 font-semibold">{countCommits}</span>{' '}
+        {getPlural(countCommits)}
+      </p>
       <RefreshableCommitList initialCommits={initialCommits} />
     </main>
   )

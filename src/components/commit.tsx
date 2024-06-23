@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 
 interface CommitProps {
   message: string
@@ -17,22 +17,6 @@ const Commit: React.FC<CommitProps> = ({
   authorAvatarUrl,
   isLoading,
 }) => {
-  if (isLoading) {
-    return (
-      <div className="border p-4 rounded-lg shadow-md bg-white animate-pulse">
-        <div className="flex items-center">
-          <div className="w-10 h-10 rounded-full bg-gray-300 mr-4"></div>
-          <div className="flex-1">
-            <div className="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-            <div className="h-4 bg-gray-300 rounded w-1/2 mb-2"></div>
-            <div className="h-4 bg-gray-300 rounded w-1/3 mb-2"></div>
-            <div className="h-4 bg-gray-300 rounded w-1/4"></div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="border p-4 rounded-lg shadow-md bg-white">
       <div className="flex items-center">
@@ -62,4 +46,4 @@ const Commit: React.FC<CommitProps> = ({
   )
 }
 
-export default Commit
+export default memo(Commit)
