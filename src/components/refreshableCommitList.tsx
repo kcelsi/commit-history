@@ -17,6 +17,7 @@ const RefreshableCommitList = ({
   initialCommits: CommitType[]
 }) => {
   const [commits, setCommits] = useState<CommitType[]>(initialCommits)
+  const [currentTime, setCurrentTime] = useState(dayjs())
 
   const refreshCommits = async (newCommits: CommitType[]) => {
     setCommits(newCommits)
@@ -24,12 +25,7 @@ const RefreshableCommitList = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCommits((prevCommits) =>
-        prevCommits.map((commit) => ({
-          ...commit,
-          timestamp: dayjs(commit.timestamp).fromNow(),
-        }))
-      )
+      setCurrentTime(dayjs())
     }, TIME_TO_UPDATE_MS)
 
     return () => clearInterval(interval)
@@ -46,7 +42,7 @@ const RefreshableCommitList = ({
               message={commit.commit.message}
               authorName={commit.commit.author.name}
               sha={commit.sha}
-              timestamp={commit.timestamp}
+              timestamp={dayjs(commit.commit.author.date).from(currentTime)}
               isLoading={commit.is_loading}
             />
           </li>
