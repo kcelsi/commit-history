@@ -29,7 +29,7 @@ const Commit: React.FC<CommitProps> = ({
 
         <div className="flex-1">
           <p
-            className="text-lg font-bold overflow-hidden"
+            className="text-lg font-bold overflow-hidden break-words"
             style={{
               display: '-webkit-box',
               WebkitBoxOrient: 'vertical',
