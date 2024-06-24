@@ -41,7 +41,7 @@ const Commit: React.FC<CommitProps> = ({
           </p>
           <p className="text-gray-700">by {authorName}</p>
           <p className="text-gray-500">{timestamp}</p>
-          <p className="text-sm text-gray-400">sha: {sha}</p>
+          <p className="text-sm text-gray-400 break-all">sha: {sha}</p>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ const HomePage = async () => {
 
   return (
     <main>
-      <h1 className="text-4xl font-bold text-center text-gray-900 my-8">
+      <h1 className="text-4xl font-bold text-center text-gray-900 my-8 break-words">
         Commit History for repository
         <Link
           href="https://github.com/GKoil/GenDiff"
