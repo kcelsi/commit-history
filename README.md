@@ -37,6 +37,8 @@ Link to app: https://commit-history-delta.vercel.app/
  
 
 ## 📋 Need TODO
+- 🐞🐞🐞 After refresh commits need also change commit count
+
 - Add routing /USER_NAME/PROJECT?count="20" 🛣️
 - Make universal service for load data 💾
 - Add pagination and intersection-observer
@@ -44,5 +46,6 @@ Link to app: https://commit-history-delta.vercel.app/
 - Process errors 🐞
 - Maybe need to optimize some components  ⏱️
 - Think about cache data 🤔
+- Create basic ci/cd and check eslint
 
 
