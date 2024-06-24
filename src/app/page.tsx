@@ -1,5 +1,5 @@
 import { CommitType } from '@/types/commit'
-import RefreshableCommitList from '@/components/refreshableCommitList'
+import CommitList from '@/components/commitList'
 import { loadCommits } from '@/actions/actionCommit'
 import { DEFAULT_COMMIT_COUNT_TO_LOAD } from '@/constants/commit'
 import Link from 'next/link'
@@ -30,7 +30,7 @@ const HomePage = async () => {
         <span className="text-blue-500 font-semibold">{countCommits}</span>{' '}
         {getPlural(countCommits)}
       </p>
-      <RefreshableCommitList initialCommits={initialCommits} />
+      <CommitList initialCommits={initialCommits} />
     </main>
   )
 }

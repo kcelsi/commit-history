@@ -11,11 +11,7 @@ const TIME_TO_UPDATE_MS = 60000
 
 dayjs.extend(relativeTime)
 
-const RefreshableCommitList = ({
-  initialCommits,
-}: {
-  initialCommits: CommitType[]
-}) => {
+const CommitList = ({ initialCommits }: { initialCommits: CommitType[] }) => {
   const [commits, setCommits] = useState<CommitType[]>(initialCommits)
   const [currentTime, setCurrentTime] = useState(dayjs())
 
@@ -51,4 +47,4 @@ const RefreshableCommitList = ({
   )
 }
 
-export default RefreshableCommitList
+export default CommitList
